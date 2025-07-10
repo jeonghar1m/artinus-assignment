@@ -1,11 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router";
-import { Home } from "./components";
+import { HomePage, ListPage } from "./pages";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/list" element={<ListPage />} />
       </Routes>
     </BrowserRouter>
   );
