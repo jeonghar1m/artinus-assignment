@@ -16,7 +16,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         />
         <div>
           <h3>{product.title}</h3>
-          <p>{product.price}</p>
+          <span>${product.price}</span>
         </div>
       </Card>
     </Box>
