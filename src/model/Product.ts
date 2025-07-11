@@ -3,7 +3,6 @@ export interface Product {
   title: string;
   description: string;
   price: number;
-  tags: string[];
   discountPercentage: number;
   rating: number;
   stock: number;
@@ -13,13 +12,12 @@ export interface Product {
 }
 
 export interface ProductListResponse {
-  products: Omit<Product, "tags">[];
+  products: Product[];
   total: number;
   skip: number;
   limit: number;
 }
 
-export type ProductDetailResponse = Pick<
-  Product,
-  "id" | "title" | "price" | "tags" | "thumbnail"
->;
+export interface ProductDetailResponse extends Product {
+  tags: string[];
+}
