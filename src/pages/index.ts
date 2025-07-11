@@ -1,2 +1,2 @@
-export { default as HomePage } from "./home-page";
-export { default as ListPage } from "./list-page";
+export { default as Home } from "./home";
+export { default as List } from "./list";
