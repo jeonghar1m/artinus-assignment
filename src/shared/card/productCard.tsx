@@ -1,4 +1,4 @@
-import { Box, Card } from "@radix-ui/themes";
+import { Box, Card, Link } from "@radix-ui/themes";
 import type { Product } from "../../model";
 
 interface ProductCardProps {
@@ -6,20 +6,20 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const { id, thumbnail, title, price } = product;
+
   return (
-    <Box maxWidth="240px">
-      <Card>
-        <img
-          src={product.thumbnail}
-          alt={`${product.title} 썸네일`}
-          width="100%"
-        />
-        <div>
-          <h3>{product.title}</h3>
-          <span>${product.price}</span>
-        </div>
-      </Card>
-    </Box>
+    <Link href={`/product/${id}`}>
+      <Box maxWidth="240px">
+        <Card>
+          <img src={thumbnail} alt={`${title} 썸네일`} width="100%" />
+          <div>
+            <h3>{title}</h3>
+            <span>${price}</span>
+          </div>
+        </Card>
+      </Box>
+    </Link>
   );
 };
 
