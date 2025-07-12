@@ -11,6 +11,10 @@ const ProductList = () => {
     return data?.pages.flatMap((page) => page.products) ?? [];
   }, [data]);
 
+  const isEmpty = !products.length;
+
+  if (isEmpty) return <>상품이 없습니다.</>;
+
   return (
     <>
       <ProductListGrid>

@@ -1,9 +1,6 @@
-import { Grid } from "@radix-ui/themes";
-import type { ReactNode } from "react";
+import { Grid, type GridProps } from "@radix-ui/themes";
 
-interface ProductListGridProps {
-  children: ReactNode;
-}
+type ProductListGridProps = Pick<GridProps, "children">;
 
 const ProductListGrid = ({ children }: ProductListGridProps) => {
   return (
