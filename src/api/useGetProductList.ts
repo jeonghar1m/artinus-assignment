@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import { API_URL_PREFIX } from "../constants";
 import type { ProductListResponse } from "../model";
 
@@ -11,7 +11,7 @@ interface GetProductListParams {
 const useGetProductList = ({ limit = 20 }: GetProductListParams) => {
   const skip = 0;
   const { data, isLoading, error, fetchNextPage } =
-    useInfiniteQuery<ProductListResponse>({
+    useSuspenseInfiniteQuery<ProductListResponse>({
       queryKey: [GET_PRODUCT_LIST_QUERY_KEY],
       queryFn: async ({ pageParam: pageOffset }: { pageParam?: unknown }) => {
         const currentSkip = pageOffset as number;
