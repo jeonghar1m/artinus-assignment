@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div<{ width: string; height: string }>`
   position: relative;
-  width: 216px;
-  height: 216px;
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
 `;
 
-export const Img = styled.img`
+export const Img = styled.img<{ width: string; height: string }>`
   transition: all 0.5s;
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
 
   &.loading {
     filter: blur(10px);

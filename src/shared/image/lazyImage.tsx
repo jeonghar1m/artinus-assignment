@@ -6,11 +6,19 @@ import { Skeleton } from "@radix-ui/themes";
 interface LazyImageProps
   extends Omit<ImgHTMLAttributes<HTMLImageElement>, "loading"> {
   placeholderSrc?: string;
+  width?: string;
+  height?: string;
 }
 
-const IMG_SIZE = "216px";
+const DEFAULT_IMG_SIZE = "216px";
 
-const LazyImage = ({ placeholderSrc, src = "", ...props }: LazyImageProps) => {
+const LazyImage = ({
+  placeholderSrc,
+  src = "",
+  width = DEFAULT_IMG_SIZE,
+  height = DEFAULT_IMG_SIZE,
+  ...props
+}: LazyImageProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [imgSrc, setImgSrc] = useState(placeholderSrc || src);
   const [isLazy, setIsLazy] = useState(true);
@@ -36,15 +44,17 @@ const LazyImage = ({ placeholderSrc, src = "", ...props }: LazyImageProps) => {
   }, [src, inView, imgSrc, placeholderSrc]);
 
   return (
-    <Container ref={ref}>
+    <Container width={width} height={height} ref={ref}>
       {isLoading ? (
-        <Skeleton width={IMG_SIZE} height={IMG_SIZE} />
+        <Skeleton width={width} height={height} />
       ) : (
         <Img
           {...props}
           className={customClassName}
           src={imgSrc}
           loading="lazy"
+          width={width}
+          height={height}
         />
       )}
     </Container>
