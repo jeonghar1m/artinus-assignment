@@ -14,7 +14,7 @@ const Home = () => {
 
   return (
     <DefaultTemplate title="상품 리스트">
-      <Grid columns="3" gap="100px" width="auto">
+      <Grid columns="3" gap="calc(100px / 3)" width="auto">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
