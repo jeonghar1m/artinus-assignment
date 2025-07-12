@@ -1,32 +1,37 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { API_URL_PREFIX } from "../constants";
 import type { ProductListResponse } from "../model";
 
 export const GET_PRODUCT_LIST_QUERY_KEY = "getProductList";
 
 interface GetProductListParams {
-  skip?: number;
   limit?: number;
 }
 
-const useGetProductList = ({ skip = 0, limit = 20 }: GetProductListParams) => {
-  const {
-    data: products,
-    isLoading,
-    error,
-  } = useQuery<ProductListResponse>({
-    queryKey: [GET_PRODUCT_LIST_QUERY_KEY, skip, limit],
-    queryFn: async () => {
-      const queryParams = new URLSearchParams({
-        skip: skip.toString(),
-        limit: limit.toString(),
-      });
-      const res = await fetch(`${API_URL_PREFIX}/products?${queryParams}`);
-      return await res.json();
-    },
-  });
+const useGetProductList = ({ limit = 20 }: GetProductListParams) => {
+  const skip = 0;
+  const { data, isLoading, error, fetchNextPage } =
+    useInfiniteQuery<ProductListResponse>({
+      queryKey: [GET_PRODUCT_LIST_QUERY_KEY],
+      queryFn: async ({ pageParam: pageOffset }: { pageParam?: unknown }) => {
+        const currentSkip = pageOffset as number;
+        const queryParams = new URLSearchParams({
+          skip: currentSkip.toString(),
+          limit: limit.toString(),
+        });
+        const res = await fetch(`${API_URL_PREFIX}/products?${queryParams}`);
+        return await res.json();
+      },
+      initialPageParam: skip,
+      getNextPageParam: (lastPage, allPages) => {
+        if (!lastPage?.products || lastPage.products.length < limit) {
+          return undefined;
+        }
+        return skip + allPages.length * limit;
+      },
+    });
 
-  return { products, isLoading, error };
+  return { data, isLoading, error, fetchNextPage };
 };
 
 export default useGetProductList;
