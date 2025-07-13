@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { DefaultTemplate } from "../../shared/template";
 import ProductList from "./components/productList";
-import Loading from "../../shared/ui/loading";
+import { Loading } from "../../shared/ui";
 
 const Home = () => {
   return (
