@@ -1,7 +1,7 @@
 import { DefaultTemplate } from "../../shared/template";
 import { Suspense } from "react";
 import ProductDetail from "./components/productDetail";
-import Loading from "../../shared/ui/loading";
+import { Loading } from "../../shared/ui";
 
 const Product = () => {
   return (
