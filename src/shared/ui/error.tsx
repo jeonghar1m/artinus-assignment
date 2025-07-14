@@ -1,13 +1,13 @@
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import { Container } from "./error.style";
-import { Button, Heading, Link, Text } from "@radix-ui/themes";
+import { Heading, Text } from "@radix-ui/themes";
+import { ReturnHomeButton } from "../button";
 
 interface ErrorProps {
   error: Error;
 }
 
 const Error = ({ error }: ErrorProps) => {
-  console.log(error.message);
   return (
     <Container direction="column" gap="10" align="center">
       <ExclamationTriangleIcon width={100} height={100} color="red" />
@@ -15,9 +15,7 @@ const Error = ({ error }: ErrorProps) => {
       <Text size="5">
         {error.name}: {error.message}
       </Text>
-      <Button asChild>
-        <Link href="/">홈으로 돌아가기</Link>
-      </Button>
+      <ReturnHomeButton />
     </Container>
   );
 };
