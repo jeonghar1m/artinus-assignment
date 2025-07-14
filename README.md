@@ -22,4 +22,4 @@
 
 ## 배포 URL
 
-https://artinus.jeongharim.com
+https://artinus.jeongharim.com (Netlify)
