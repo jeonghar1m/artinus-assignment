@@ -22,6 +22,7 @@ const useGetProductList = ({ limit = 20 }: GetProductListParams) => {
         const res = await fetch(`${API_URL_PREFIX}/products?${queryParams}`);
         return await res.json();
       },
+      gcTime: 1000 * 60 * 5,
       initialPageParam: skip,
       getNextPageParam: (lastPage, allPages) => {
         if (!lastPage?.products || lastPage.products.length < limit) {
