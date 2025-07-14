@@ -3,12 +3,15 @@ import type { Product } from "../../model";
 import { Container } from "./productCard.style";
 import { LazyImage } from "../image";
 import Price from "../text/price";
+import { useDeviceSelector } from "../../hooks/useDeviceSelector";
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const { isMobile } = useDeviceSelector();
+
   const { id, thumbnail, title, price, discountPercentage, images } = product;
 
   const placeholderSrc = images[0];
@@ -21,8 +24,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
             src={thumbnail}
             placeholderSrc={placeholderSrc}
             alt={`${title} 썸네일`}
-            width="216px"
-            height="216px"
+            width={isMobile ? "100%" : "216px"}
+            height={isMobile ? "100%" : "216px"}
           />
           <div>
             <h3>{title}</h3>
