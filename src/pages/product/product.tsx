@@ -5,7 +5,7 @@ import { Loading } from "../../shared/ui";
 
 const Product = () => {
   return (
-    <DefaultTemplate title="상품 상세" prevHref="/">
+    <DefaultTemplate title="상품 상세" prevHref="/" enableDocumentTitle={false}>
       <Suspense
         fallback={<Loading message="상품 상세 정보를 불러오는 중입니다." />}
       >
